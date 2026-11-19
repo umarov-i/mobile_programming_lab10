@@ -1,16 +1,25 @@
 import 'package:flutter/material.dart';
 
+import 'screens/welcome_screen.dart';
+import 'services/app_state.dart';
+import 'theme/app_theme.dart';
+
 void main() {
-  runApp(const MainApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  // AppScope creates the ONE classifier at start-up and closes it on shutdown.
+  runApp(const AppScope(child: ClassifierApp()));
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class ClassifierApp extends StatelessWidget {
+  const ClassifierApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(body: Center(child: Text('Hello World!'))),
+    return MaterialApp(
+      title: 'Teach It, Ship It',
+      debugShowCheckedModeBanner: false,
+      theme: AppTheme.light(),
+      home: const WelcomeScreen(),
     );
   }
 }
